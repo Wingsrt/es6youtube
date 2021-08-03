@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<input id="input">
+
+<button onclick="video()">click heare</button>
+
+
+
+
+
+
+    <div id="box"></div>
+
+
+    <script>
+
+async function video(){
+
+   
+
+    var box=document.getElementById('box');
+    box.textContent=null;
+
+   var input=document.getElementById('input').value;
+
+  //  AIzaSyABX_iKTcM2MEhSZIV7ur-tkqiqxjzgD80
+
+let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${input}&key=AIzaSyAulGcpNSbrRTzgD_TR-PoH-Xh-M8gyuhQ&maxResult=20`)
+
+
+let data =await res.json();
+
+
+
+
+let a=data.items;
+
+//a=a.filter(function(el){return el.id.videoId != undefined})
+
+
+a=a.filter((el)=>{
+
+    return el.id.videoId !=undefined;
+
+});
+
+
+a.forEach(video => {
+
+   // console.log(video.id.videoId)
+  var box1=document.createElement('div');
+
+   box1.innerHTML=`<iframe width="560" height="315" src="https://www.youtube.com/embed/${video.id.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    
+   
+    box.append(box1)
+
+
+});
+
+
+}
+
+
+
+
+
+    </script>
+</html>
