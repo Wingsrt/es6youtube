@@ -4,32 +4,34 @@
 
 
 
-<input id="input">
-
-<button onclick="video()">click heare</button>
 
 
+<button onclick="video()">most poplar</button>
 
 
 
 
-    <div id="box"></div>
+
+
+    <div id="box" style="width: 1400px;display:flex;flex-wrap: wrap;"></div>
 
 
     <script>
+
+        video();
 
 async function video(){
 
    
 
-    var box=document.getElementById('box');
+     var box=document.getElementById('box');
     box.textContent=null;
 
-   var input=document.getElementById('input').value;
+  // var input=document.getElementById('input').value;
 
   //  AIzaSyABX_iKTcM2MEhSZIV7ur-tkqiqxjzgD80
 
-let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${input}&key=AIzaSyAulGcpNSbrRTzgD_TR-PoH-Xh-M8gyuhQ&maxResult=20`)
+let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?videoCategory=mostpopular&key=AIzaSyBWvtQTT_MU4UYs6wDA5kWGz__ZwKQreBQ`)
 
 
 let data =await res.json();
@@ -41,21 +43,23 @@ let a=data.items;
 
 //a=a.filter(function(el){return el.id.videoId != undefined})
 
-
-a=a.filter((el)=>{
+/*
+  a=a.filter((el)=>{
 
     return el.id.videoId !=undefined;
 
-});
+});   */
 
 
 a.forEach(video => {
 
    // console.log(video.id.videoId)
   var box1=document.createElement('div');
+  //box.style.height="100px"
 
-   box1.innerHTML=`<iframe width="560" height="315" src="https://www.youtube.com/embed/${video.id.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+   box1.innerHTML=`<iframe width="500" height="500" src="https://www.youtube.com/embed/${video.id.videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     
+   box1.style.margin="40px"
    
     box.append(box1)
 
